@@ -10,14 +10,6 @@ A personal collection of reusable AI Skills for repeatable workflows and practic
 
 매번 같은 요청이나 작업 방식을 다시 설명하지 않고, 반복되는 지침과 워크플로를 재사용 가능한 Skill로 만드는 것이 목적입니다.
 
-예를 들면 다음과 같은 작업을 Skill로 만들 수 있습니다.
-
-- 일정한 출력 형식을 강제하기
-- 생성된 파일을 한 번에 복사하고 붙여넣기 쉽게 만들기
-- GitHub 초보자를 위한 설명 방식을 표준화하기
-- 자동화 프로젝트를 단계적으로 진행하는 방식 정의하기
-- 자주 사용하는 AI 활용 패턴을 재사용 가능한 형태로 저장하기
-
 이 저장소는 단순한 프롬프트 모음이 아니라, AI 워크플로를 어떻게 설계하고 테스트하고 개선했는지를 기록하는 포트폴리오 역할도 합니다.
 
 ## 저장소 구조
@@ -31,20 +23,14 @@ A personal collection of reusable AI Skills for repeatable workflows and practic
     |   |-- SKILL.md
     |   `-- agents/
     |       `-- openai.yaml
-    `-- github-beginner-guide/
+    |-- github-beginner-guide/
+    |   |-- SKILL.md
+    |   `-- agents/
+    |       `-- openai.yaml
+    `-- automation-project-coach/
         |-- SKILL.md
         `-- agents/
             `-- openai.yaml
-
-Skill이 늘어나면 다음과 같은 형태가 됩니다.
-
-    ai-skills/
-    |-- AGENTS.md
-    |-- README.md
-    |-- one-paste-output/
-    |-- github-beginner-guide/
-    |-- automation-project-coach/
-    `-- ...
 
 ## 저장소 공통 규칙
 
@@ -63,28 +49,18 @@ Skill이 늘어나면 다음과 같은 형태가 됩니다.
 
 ### 1. one-paste-output
 
-상태: 제작 완료, 검증 완료, ChatGPT 설치 및 실제 테스트 완료
+상태: 제작 완료, 검증 완료, 패키징 완료, ChatGPT 설치 및 실제 테스트 완료
 
 목적:
 
 파일 내용을 사용자가 한 번에 복사하고 붙여넣을 수 있도록, 파일 하나를 하나의 완전한 코드블럭으로 출력합니다.
 
-다음과 같은 요청에서 사용하도록 설계했습니다.
+주요 사용 예시:
 
 - "전체 코드로 줘"
 - "한 번에 복붙할 수 있게 줘"
 - "수정 부분 말고 전체 파일로 줘"
 - "코드블럭 나누지 마"
-- "README.md 전체 내용을 한 번에 붙여넣을 수 있게 작성해줘"
-
-주요 동작:
-
-- 사용자가 전체 파일을 요청하면 부분 코드가 아니라 완성된 파일 전체를 반환
-- 파일 하나당 코드블럭 하나 사용
-- `...existing code...` 같은 생략용 placeholder 사용 금지
-- 사용자가 patch나 부분 수정 방식이 헷갈린다고 하면 전체 파일 출력을 우선
-- 여러 파일을 요청한 경우에도 각 파일을 독립적으로 한 번에 복사할 수 있게 출력
-- Markdown 파일 내부에 fenced code block이 있어도 바깥쪽 fence 길이를 조정하여 출력이 중간에 깨지지 않도록 처리
 
 경로: `one-paste-output/`
 
@@ -96,28 +72,59 @@ Skill이 늘어나면 다음과 같은 형태가 됩니다.
 
 GitHub를 처음 사용하는 사람도 따라갈 수 있도록 클릭 위치, 파일 경로, 입력값, Commit 방법, 결과 확인 방법을 단계적으로 안내합니다.
 
-다음과 같은 요청에서 사용하도록 설계했습니다.
-
-- "GitHub 처음인데 레포 만드는 법 알려줘"
-- "어디를 눌러야 해?"
-- "파일을 어디서 수정해?"
-- "Commit이 뭔지 모르겠어"
-- "GitHub Actions 오류를 어떻게 확인해?"
-- "잘못 수정한 파일을 복구하고 싶어"
-
 주요 동작:
 
 - 기본적으로 GitHub 웹 UI를 우선 사용
 - 필요한 클릭 경로와 정확한 파일 경로를 명시
 - 초보자에게 불필요한 Git 명령어 사용을 최소화
-- Commit, Branch, Pull Request 같은 용어를 처음 필요할 때 쉽게 설명
-- GitHub 연결이 가능하면 실제 저장소 상태를 먼저 확인하고 추측하지 않음
-- 변경 후 반드시 결과를 확인하는 방법을 안내
-- 오류 발생 시 한 번에 여러 원인을 추측하기보다 실제 오류 메시지를 기준으로 단계적으로 해결
-- `reset`, `force push` 같은 위험한 명령은 기본적으로 피하고 안전한 복구 방법을 우선
-- API Key, Token, Webhook URL 같은 비밀정보 노출을 방지
+- Commit, Branch, Pull Request 같은 용어를 쉽게 설명
+- GitHub 연결이 가능하면 실제 저장소 상태를 먼저 확인
+- 변경 후 결과 확인 방법을 반드시 안내
+- 위험한 복구 명령보다 안전한 방법을 우선
+- API Key, Token, Webhook URL 같은 비밀정보 노출 방지
 
 경로: `github-beginner-guide/`
+
+### 3. automation-project-coach
+
+상태: 제작 완료, 검증 완료, 패키징 완료
+
+목적:
+
+자동화 프로젝트나 AI Workflow를 처음부터 한 번에 구현하지 않고, 작은 테스트 단위로 나누어 안정적으로 완성하도록 안내합니다.
+
+다음과 같은 요청에서 사용하도록 설계했습니다.
+
+- 업무 자동화를 만들고 싶다
+- Slack, API, 데이터 수집 등을 연결하고 싶다
+- AI Agent 또는 Agentic Workflow를 만들고 싶다
+- GitHub Actions나 스케줄러로 자동 실행하고 싶다
+- 자동화가 실패했는데 어디부터 확인해야 할지 모르겠다
+- 개인용 자동화를 실제 운영 단계까지 가져가고 싶다
+
+기본 진행 방식:
+
+    최소 목표 정의
+    -> 가장 작은 동작 테스트
+    -> 결과 확인
+    -> 기능 하나 추가
+    -> 다시 테스트
+    -> 오류 원인 분리
+    -> 안정성 보강
+    -> 자동 실행 또는 운영 전환
+    -> 첫 실제 실행 확인
+
+주요 동작:
+
+- 사용자가 이미 제공한 정보를 다시 묻지 않음
+- 중요한 구조 결정이나 운영 전환 시점에는 확인을 받음
+- 사소한 구현 사항마다 불필요하게 확인을 반복하지 않음
+- 실패 시 전체 시스템을 다시 만들기보다 실패 지점을 먼저 분리
+- Retry, 중복 방지, 상태 저장, 동시 실행, Secret 관리 등 운영 안정성을 필요할 때만 추가
+- 비용과 유지보수 부담을 고려해 현재 목적에 맞는 가장 단순한 방법을 우선
+- 한 번 실행됐다는 이유만으로 바로 운영 완료로 판단하지 않고 반복 실행 안전성까지 확인
+
+경로: `automation-project-coach/`
 
 ## Skill 기본 구조
 
@@ -150,7 +157,7 @@ ChatGPT에서 Skill을 표시할 때 사용하는 UI 메타데이터를 정의�
     references/
     assets/
 
-단, 실제 Skill의 품질이나 재사용성을 높이는 경우에만 추가합니다.
+실제 Skill의 품질이나 재사용성을 높이는 경우에만 추가합니다.
 
 ## 개발 흐름
 
@@ -184,21 +191,6 @@ ChatGPT에서 Skill을 표시할 때 사용하는 UI 메타데이터를 정의�
 
 GitHub는 Skill 소스의 기준 저장소로 사용하고, `skill.zip`은 ChatGPT에 설치하고 테스트하기 위한 배포 파일로 사용합니다.
 
-## ChatGPT에 Skill 설치하기
-
-GitHub에 Skill 소스가 있다고 해서 ChatGPT에서 자동으로 사용할 수 있는 것은 아닙니다.
-
-일반적인 설치 흐름은 다음과 같습니다.
-
-1. Skill 디렉터리를 준비합니다.
-2. Skill을 검증합니다.
-3. `skill.zip`으로 패키징합니다.
-4. ChatGPT의 Skills 화면을 엽니다.
-5. 패키징된 Skill을 업로드하거나 설치합니다.
-6. 새 대화에서 실제 요청으로 테스트합니다.
-
-요청 내용이 Skill의 description과 일치하면 ChatGPT가 해당 Skill을 사용할 수 있습니다.
-
 ## 새로운 Skill 추가하기
 
 새 Skill을 만들 때는 다음 순서를 기준으로 합니다.
@@ -213,34 +205,6 @@ GitHub에 Skill 소스가 있다고 해서 ChatGPT에서 자동으로 사용할 
 8. Skill을 검증하고 패키징합니다.
 9. 실제 상황과 비슷한 프롬프트로 테스트합니다.
 10. 이 README에 Skill 설명을 추가합니다.
-
-권장 구조:
-
-    new-skill-name/
-    |-- SKILL.md
-    |-- agents/
-    |   `-- openai.yaml
-    |-- scripts/       선택 사항
-    |-- references/    선택 사항
-    `-- assets/        선택 사항
-
-## 다음 Skill 후보
-
-### automation-project-coach
-
-자동화 프로젝트를 처음부터 한 번에 구현하지 않고, 작은 테스트 단위로 나누어 진행하도록 안내하는 Skill입니다.
-
-예상 흐름:
-
-    최소 동작 테스트
-    -> 결과 확인
-    -> 기능 하나 추가
-    -> 다시 테스트
-    -> 오류 원인 분리
-    -> 안정화
-    -> 실제 운영으로 전환
-
-앞으로도 단순히 Skill 개수를 늘리는 것보다, 실제로 반복해서 사용하는 작업이나 선호 방식이 생겼을 때 Skill로 추가할 계획입니다.
 
 ## 보안
 
@@ -259,9 +223,10 @@ GitHub에 Skill 소스가 있다고 해서 ChatGPT에서 자동으로 사용할 
 
 ## 현재 상태
 
-현재 두 개의 Skill이 저장소에 있습니다.
+현재 세 개의 Skill이 저장소에 있습니다.
 
 - `one-paste-output`: 제작, 검증, 패키징, ChatGPT 설치, 실제 테스트 완료
 - `github-beginner-guide`: 제작, 검증, 패키징 완료
+- `automation-project-coach`: 제작, 검증, 패키징 완료
 
-다음 단계는 `github-beginner-guide`를 ChatGPT에 설치해 실제 GitHub 초보자 요청으로 테스트한 뒤, 필요하면 지침을 개선하는 것입니다.
+앞으로도 Skill 개수를 채우기 위해 만들기보다, 실제 사용 중 반복되는 문제나 작업 방식이 생길 때 추가할 계획입니다.
