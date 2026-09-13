@@ -1,0 +1,3 @@
+interface:
+  display_name: "One Paste Output"
+  short_description: "Return complete files in one copy-paste-ready block per file."
