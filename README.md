@@ -27,7 +27,11 @@ A personal collection of reusable AI Skills for repeatable workflows and practic
     ai-skills/
     |-- AGENTS.md
     |-- README.md
-    `-- one-paste-output/
+    |-- one-paste-output/
+    |   |-- SKILL.md
+    |   `-- agents/
+    |       `-- openai.yaml
+    `-- github-beginner-guide/
         |-- SKILL.md
         `-- agents/
             `-- openai.yaml
@@ -82,16 +86,38 @@ Skill이 늘어나면 다음과 같은 형태가 됩니다.
 - 여러 파일을 요청한 경우에도 각 파일을 독립적으로 한 번에 복사할 수 있게 출력
 - Markdown 파일 내부에 fenced code block이 있어도 바깥쪽 fence 길이를 조정하여 출력이 중간에 깨지지 않도록 처리
 
-경로:
+경로: `one-paste-output/`
 
-`one-paste-output/`
+### 2. github-beginner-guide
 
-구조:
+상태: 제작 완료, 검증 완료, 패키징 완료
 
-    one-paste-output/
-    |-- SKILL.md
-    `-- agents/
-        `-- openai.yaml
+목적:
+
+GitHub를 처음 사용하는 사람도 따라갈 수 있도록 클릭 위치, 파일 경로, 입력값, Commit 방법, 결과 확인 방법을 단계적으로 안내합니다.
+
+다음과 같은 요청에서 사용하도록 설계했습니다.
+
+- "GitHub 처음인데 레포 만드는 법 알려줘"
+- "어디를 눌러야 해?"
+- "파일을 어디서 수정해?"
+- "Commit이 뭔지 모르겠어"
+- "GitHub Actions 오류를 어떻게 확인해?"
+- "잘못 수정한 파일을 복구하고 싶어"
+
+주요 동작:
+
+- 기본적으로 GitHub 웹 UI를 우선 사용
+- 필요한 클릭 경로와 정확한 파일 경로를 명시
+- 초보자에게 불필요한 Git 명령어 사용을 최소화
+- Commit, Branch, Pull Request 같은 용어를 처음 필요할 때 쉽게 설명
+- GitHub 연결이 가능하면 실제 저장소 상태를 먼저 확인하고 추측하지 않음
+- 변경 후 반드시 결과를 확인하는 방법을 안내
+- 오류 발생 시 한 번에 여러 원인을 추측하기보다 실제 오류 메시지를 기준으로 단계적으로 해결
+- `reset`, `force push` 같은 위험한 명령은 기본적으로 피하고 안전한 복구 방법을 우선
+- API Key, Token, Webhook URL 같은 비밀정보 노출을 방지
+
+경로: `github-beginner-guide/`
 
 ## Skill 기본 구조
 
@@ -171,11 +197,6 @@ GitHub에 Skill 소스가 있다고 해서 ChatGPT에서 자동으로 사용할 
 5. 패키징된 Skill을 업로드하거나 설치합니다.
 6. 새 대화에서 실제 요청으로 테스트합니다.
 
-예를 들어 `one-paste-output`을 설치한 뒤 다음과 같이 요청할 수 있습니다.
-
-    README.md 전체 내용을 한 번에 복붙할 수 있게 작성해줘.
-    중간에 코드블럭 나누지 마.
-
 요청 내용이 Skill의 description과 일치하면 ChatGPT가 해당 Skill을 사용할 수 있습니다.
 
 ## 새로운 Skill 추가하기
@@ -204,10 +225,6 @@ GitHub에 Skill 소스가 있다고 해서 ChatGPT에서 자동으로 사용할 
     `-- assets/        선택 사항
 
 ## 다음 Skill 후보
-
-### github-beginner-guide
-
-GitHub 초보자가 따라가기 쉽도록 클릭 위치, 수정할 파일, Commit 방법, 결과 확인 방법까지 단계적으로 안내하는 Skill입니다.
 
 ### automation-project-coach
 
@@ -242,13 +259,9 @@ GitHub 초보자가 따라가기 쉽도록 클릭 위치, 수정할 파일, Comm
 
 ## 현재 상태
 
-현재 첫 번째 Skill인 `one-paste-output`까지 다음 과정을 완료했습니다.
+현재 두 개의 Skill이 저장소에 있습니다.
 
-- Skill 설계
-- GitHub 저장
-- 검증
-- `skill.zip` 패키징
-- ChatGPT 설치
-- 실제 요청 테스트
+- `one-paste-output`: 제작, 검증, 패키징, ChatGPT 설치, 실제 테스트 완료
+- `github-beginner-guide`: 제작, 검증, 패키징 완료
 
-다음 단계부터는 실제 사용 중 반복적으로 필요했던 작업을 중심으로 새로운 Skill을 추가할 예정입니다.
+다음 단계는 `github-beginner-guide`를 ChatGPT에 설치해 실제 GitHub 초보자 요청으로 테스트한 뒤, 필요하면 지침을 개선하는 것입니다.
